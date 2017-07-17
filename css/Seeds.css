@@ -1,0 +1,327 @@
+body {
+  background-size: 100% 100%;
+  overflow-x: hidden;
+}
+
+
+p {
+  font-family: "Alegreya Sans SC", sans-serif;
+  font-size: 0.9em;
+}
+
+
+h1 {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 2.2em;
+  font-weight: lighter;
+}
+
+h2 {
+  position: absolute;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1.5em;
+  word-spacing: 0.3em;
+  font-weight: lighter;
+}
+
+h2:hover {
+  color: #FFF;
+} 
+
+h3 {
+  font-family: "Alegreya Sans SC", sans-serif;
+  font-size: 1em;
+  font-weight: 200;
+}
+
+ 
+
+h4 {
+  font-family: "Alegreya Sans SC", sans-serif;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+h5 {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1.35em;
+  font-weight: lighter;
+}
+
+h5:hover {
+  color: #FFF;
+} 
+
+h6 {
+  font-family: "Josefin Sans";
+  font-size: 1.25em;
+  cursor: pointer;
+}
+
+h6:hover {
+  color: #FFF;
+}  
+
+/******/
+
+a:link {
+  text-decoration: none;
+  display: inline-table;
+  color: #FFF;
+  font-size: 30px;
+  font-family: "Alegreya Sans SC", sans-serif;
+  text-indent: -55px;
+  font-weight: medium;
+}
+
+li a:link {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #FFFFFF;
+  font-weight: 300;
+	text-decoration: none;
+}
+
+li a:visited {
+	color:#FFFFFF;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #000;
+	text-decoration: none;
+}
+
+li a:hover {
+	display: block;
+	color: #000;
+	text-decoration: none;
+}
+
+a:active {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+
+
+
+
+/*****/
+svg {
+    display: flex;
+    width: 1400;
+    align-items: center;
+    justify-content: center;
+}
+path.slice{
+        stroke-width:2px;
+    }
+
+    text{
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    polyline{
+        opacity: .3;
+        stroke: black;
+        stroke-width: 2px;
+        fill: none;
+    }
+
+    .labelValue
+    {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 60%;
+        opacity: .5;
+
+    }
+
+    label {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: normal;
+    }
+
+    .toolTip {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        position: absolute;
+        display: none;
+        width: auto;
+        height: auto;
+        background: none repeat scroll 0 0 white;
+        border: 0 none;
+        border-radius: 8px 8px 8px 8px;
+        box-shadow: -3px 3px 15px #888888;
+        color: black;
+        font: 12px sans-serif;
+        padding: 5px;
+        text-align: center;
+    }
+
+
+    .legend {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 60%;
+    }
+    rect {
+        stroke-width: 2;
+    }
+
+    text {
+        font: 10px sans-serif;
+    }
+
+
+    text.value{
+        font-size: 200%;
+        fill: white;
+    }
+
+    text.label{
+        font-size: 100%;
+    }
+
+    .axis text {
+        font: 10px sans-serif;
+    }
+
+    .axis path{
+        fill: none;
+        stroke: #000;
+    }
+
+    .axis line {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+    }
+
+    .axis .tick line {
+        stroke-width: 1;
+        stroke: rgba(0, 0, 0, 0.2);
+    }
+
+    .axisHorizontal path{
+        fill: none;
+    }
+
+    .axisHorizontal line {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+    }
+
+    .axisHorizontal .tick line {
+        stroke-width: 1;
+        stroke: rgba(0, 0, 0, 0.2);
+    }
+
+    .bar {
+        fill: steelblue;
+        fill-opacity: .9;
+    }
+
+    .x.axis path {
+        display: none;
+    }
+
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+
+  .x.axis path {
+    display: none;
+  }
+
+
+
+  .line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+  }
+
+.nav {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  padding-top: 0.5em;
+}
+
+.navtitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 13em;
+}
+
+.description {
+  padding-top: 1.5em;
+  text-align: center;
+}
+
+.seeds1 {
+  top: 3em;
+  position: relative;
+  display: flex;
+  width: auto;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+
+#percentage {
+  font-size: 2.5em;
+}
+
+#title {
+  position: fixed;
+  width: 23em;
+  top: -1em;
+  left: 3em;
+}
+
+#linelocation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#linetlocation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#barlocation {
+  top: 50em;
+  display: flex;
+  width: 1500px;
+  align-items: center;
+  justify-content: center;
+}
+
+#info {
+  position: fixed;
+  display: inline-flex;
+  top: -1em;
+  word-spacing: 1em;
+  right: 3em;
+}
+
+#percentages {
+  position: relative;
+  left: 1em;
+  top: 5em;
+  padding-bottom: 3em;
+}  
+
+
+

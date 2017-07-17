@@ -1,0 +1,490 @@
+<html>
+  <head><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <title>
+      Graphing March Madness
+    </title>
+
+    <link href="http://dannyliang.com/css/Seeds.css" rel="stylesheet" type="text/css" />
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Hind" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="http://dannyliang.com/js/jquery.animateNumber.js"></script>
+  </head>
+  <body>
+    <div id = "info">
+      <h5 onclick="ALink()" style="cursor:pointer;" id = "About"> About&nbsp; </h5>
+      <h5 onclick="HLink()" style="cursor:pointer;" id = "Home"> Home&nbsp; </h5>
+      <h5 onclick="BLink()" style="cursor:pointer;" id = "Back"> Back </h5>
+    </div>
+    <div id = "title">
+      <h1 onclick = "HLink()" style="cursor:pointer;" id = "titt"> Graphing March Madness </h1>
+    </div>
+    <div>
+    
+    </div>
+    <div id = "percentages">
+	  <p id = "1seedr" style="display:none; justify-content: center;">Percentage that make the R32 &nbsp;<span id="target" style="font-size: 28px; color:black;">0 %</span>, the Sweet 16 &nbsp;<span id="target1" style="font-size: 28px; color:black;">0 %</span>Elite 8 &nbsp;<span id="target2" style="font-size: 28px; color:black;">0 %</span> Final Four&nbsp; <span id="target3" style="font-size: 28px; color:black;">0 %</span>, Championship Game&nbsp; <span id="target4" style="font-size: 28px; color:black;">0 %</span> and win it all&nbsp; <span id="target5" style="font-size: 28px; color:black;">0 %</span> <br> The sequences represent possible combinations of opponents (i.e. 16-8-4-2 would represent playing a 16th seed, then an 8th seed, then a 4th seed, then a 2nd seed). <br> <br>
+	   <p id = "last3" style="display:none; justify-content: center;">Percentage that made the R32 since 1985 &nbsp;<span id="target6" style="font-size: 28px; color:black;">0 %</span>, the Sweet 16 &nbsp;<span id="target7" style="font-size: 28px; color:black;">0 %</span>Elite 8 &nbsp;<span id="target8" style="font-size: 28px; color:black;">0 %</span> Final Four&nbsp; <span id="target9" style="font-size: 28px; color:black;">0 %</span>, Championship Game&nbsp; <span id="target10" style="font-size: 28px; color:black;">0 %</span> and won it all&nbsp; <span id="target11" style="font-size: 28px; color:black;">0 %</span> </p>
+	    <p id = "last5" style="display:none; justify-content: center;">Percentage that made the R32 in the last 15 years &nbsp;<span id="target12" style="font-size: 28px; color:black;">0 %</span>, the Sweet 16 &nbsp;<span id="target13" style="font-size: 28px; color:black;">0 %</span>Elite 8 &nbsp;<span id="target14" style="font-size: 28px; color:black;">0 %</span> Final Four&nbsp; <span id="target15" style="font-size: 28px; color:black;">0 %</span>, Championship Game&nbsp; <span id="target16" style="font-size: 28px; color:black;">0 %</span> and won it all&nbsp; <span id="target17" style="font-size: 28px; color:black;">0 %</span> </p>
+	    <p id = "upset" style="display:none; justify-content: center;">Upset rate (losses to teams seeded 5+ higher) in the last 15 years &nbsp;<span id="target18" style="font-size: 28px; color:black;">0 %</span>, since 1985 &nbsp;<span id="target19" style="font-size: 28px; color:black;">0 %</span>tournament winrate last 15 years &nbsp;<span id="target20" style="font-size: 28px; color:black;">0 </span> since 1985&nbsp; <span id="target21" style="font-size: 28px; color:black;">0 </span>, <br> average seed since 1985 &nbsp; <span id="target22" style="font-size: 28px; color:black;">0 </span> average final opponent seed <span id="target23" style="font-size: 28px; color:black;">0</span> <br> <br> <br> </p>
+  </div>
+    <h4 id = "back" style="display:none"> BACK </h4>
+    <div class = "seeds1">
+      <h6 id = "1s"> 1st Seed&nbsp;&nbsp;&nbsp; </h6>
+      <h6 id = "2s"> 2nd Seed&nbsp;&nbsp;&nbsp; </h6>
+      <h6 id = "3s"> 3rd Seed&nbsp;&nbsp;&nbsp; </h6>
+      <h6 id = "4s"> 4th Seed&nbsp;&nbsp;&nbsp; </h6>
+    </div>
+    <div class = "seeds1">
+      <h6 id = "5s"> 5th Seed&nbsp;&nbsp;&nbsp; </h6>
+      <h6 id = "6s"> 6th Seed&nbsp;&nbsp;&nbsp; </h6>
+      <h6 id = "7s"> 7th Seed&nbsp;&nbsp;&nbsp; </h6>
+      <h6 id = "8s"> 8th Seed&nbsp;&nbsp;&nbsp; </h6>
+    </div>
+    <div class = "seeds1">
+      <h6 id = "9s"> 9th Seed&nbsp;&nbsp;&nbsp; </h6>
+      <h6 id = "10s"> 10th Seed&nbsp;&nbsp;&nbsp; </h6>
+      <h6 id = "11s"> 11th Seed&nbsp;&nbsp;&nbsp; </h6>
+      <h6 id = "12s"> 12th Seed&nbsp;&nbsp;&nbsp; </h6>
+    </div>
+    <div class = "seeds1">
+      <h6 id = "13s"> 13th Seed&nbsp;&nbsp;&nbsp; </h6>
+      <h6 id = "14s"> 14th Seed&nbsp;&nbsp;&nbsp; </h6>
+      <h6 id = "15s"> 15th Seed&nbsp;&nbsp;&nbsp; </h6>
+      <h6 id = "16s"> 16th Seed </h6>
+    </div>
+    <div id = "linelocation">
+      <script type="text/javascript" id = "winr"></script>
+      <script type="text/javascript" id = "1seed"></script>
+      <script type="text/javascript" id = "2seed7"></script>
+      <script type="text/javascript" id = "3seed6"></script>
+      <script type="text/javascript" id = "4seed5"></script>
+      <script type="text/javascript" id = "5seed"></script>
+      <script type="text/javascript" id = "6seed3"></script>
+      <script type="text/javascript" id = "7seed2"></script>
+      <script type="text/javascript" id = "8seed"></script>
+      <script type="text/javascript" id = "9seed"></script>
+      <script type="text/javascript" id = "10seed2"></script>
+      <script type="text/javascript" id = "11seed3"></script>
+      <script type="text/javascript" id = "12seed4"></script>
+      <script type="text/javascript" id = "13seed5"></script>
+      <script type="text/javascript" id = "14seed"></script>
+      <script type="text/javascript" id = "15seed"></script>
+      <script type="text/javascript" id = "16seed"></script> 
+    </div>
+    <div id = "linetlocation">
+    </div>
+    <div id = "barlocation">
+    <form style="display:none; justify-content: center;" id = "form">
+      <label><input type="radio" name="dataset" id="dataset" value="total" checked> Total</label>
+      <label><input type="radio" name="dataset" id="dataset" value="Last15Years"> 2003-Present </label>
+      <label><input type="radio" name="dataset" id="dataset" value="option2"> 1985-2002 </label>
+    </form>
+    </div>
+  <script>
+
+
+  function ones(u, v, w, x, y, z, a, b, c, d, e, f) {
+  var decimal_places = 1;
+  var decimal_factor = decimal_places === 0 ? 1 : decimal_places * 10;
+  $(a).animateNumber(
+    {
+      number: u * 10,
+      color: 'black',
+      'font-size': '30px',
+
+      numberStep: function(now, tween) {
+        var floored_number = Math.floor(now) / decimal_factor,
+            target = $(tween.elem);
+        if (decimal_places > 0) {
+          floored_number = floored_number.toFixed(decimal_places);
+        }
+
+        target.text(floored_number + ' %');
+      }
+    },
+    3500
+  )
+
+ $(b).animateNumber(
+    {
+      number: v * 10,
+      color: 'black',
+      'font-size': '30px',
+
+      numberStep: function(now, tween) {
+        var floored_number = Math.floor(now) / decimal_factor,
+            target = $(tween.elem);
+        if (decimal_places > 0) {
+          floored_number = floored_number.toFixed(decimal_places);
+        }
+
+        target.text(floored_number + ' %');
+      }
+    },
+    3500
+  )
+
+   $(c).animateNumber(
+    {
+      number: w * 10,
+      color: 'black',
+      'font-size': '30px',
+
+      numberStep: function(now, tween) {
+        var floored_number = Math.floor(now) / decimal_factor,
+            target = $(tween.elem);
+        if (decimal_places > 0) {
+          floored_number = floored_number.toFixed(decimal_places);
+        }
+
+        target.text(floored_number + ' %');
+      }
+    },
+    3500
+  )
+   $(d).animateNumber(
+    {
+      number: x * 10,
+      color: 'black',
+      'font-size': '30px',
+
+      numberStep: function(now, tween) {
+        var floored_number = Math.floor(now) / decimal_factor,
+            target = $(tween.elem);
+        if (decimal_places > 0) {
+          floored_number = floored_number.toFixed(decimal_places);
+        }
+
+        target.text(floored_number + ' %');
+      }
+    },
+    3500
+  )
+   $(e).animateNumber(
+    {
+      number: y * 10,
+      color: 'black',
+      'font-size': '30px',
+
+      numberStep: function(now, tween) {
+        var floored_number = Math.floor(now) / decimal_factor,
+            target = $(tween.elem);
+        if (decimal_places > 0) {
+          floored_number = floored_number.toFixed(decimal_places);
+        }
+
+        target.text(floored_number + ' %');
+      }
+    },
+    3500
+  )
+   $(f).animateNumber(
+    {
+      number: z * 10,
+      color: 'black',
+      'font-size': '30px',
+
+      numberStep: function(now, tween) {
+        var floored_number = Math.floor(now) / decimal_factor,
+            target = $(tween.elem);
+        if (decimal_places > 0) {
+          floored_number = floored_number.toFixed(decimal_places);
+        }
+
+        target.text(floored_number + ' %');
+      }
+    },
+    3500
+  )
+  }
+  function twos(u, v, w, x, y, z, a, b, c, d, e, f) {
+  var decimal_places = 1;
+  var decimal_factor = decimal_places === 0 ? 1 : decimal_places * 10;
+  $(a).animateNumber(
+    {
+      number: u * 10,
+      color: 'black',
+      'font-size': '30px',
+
+      numberStep: function(now, tween) {
+        var floored_number = Math.floor(now) / decimal_factor,
+            target = $(tween.elem);
+        if (decimal_places > 0) {
+          floored_number = floored_number.toFixed(decimal_places);
+        }
+
+        target.text(floored_number + ' %');
+      }
+    },
+    3500
+  )
+
+ $(b).animateNumber(
+    {
+      number: v * 10,
+      color: 'black',
+      'font-size': '30px',
+
+      numberStep: function(now, tween) {
+        var floored_number = Math.floor(now) / decimal_factor,
+            target = $(tween.elem);
+        if (decimal_places > 0) {
+          floored_number = floored_number.toFixed(decimal_places);
+        }
+
+        target.text(floored_number + ' %');
+      }
+    },
+    3500
+  )
+
+   $(c).animateNumber(
+    {
+      number: w * 10,
+      color: 'black',
+      'font-size': '30px',
+
+      numberStep: function(now, tween) {
+        var floored_number = Math.floor(now) / decimal_factor,
+            target = $(tween.elem);
+        if (decimal_places > 0) {
+          floored_number = floored_number.toFixed(decimal_places);
+        }
+
+        target.text(floored_number + ' %');
+      }
+    },
+    3500
+  )
+   $(d).animateNumber(
+    {
+      number: x * 10,
+      color: 'black',
+      'font-size': '30px',
+
+      numberStep: function(now, tween) {
+        var floored_number = Math.floor(now) / decimal_factor,
+            target = $(tween.elem);
+        if (decimal_places > 0) {
+          floored_number = floored_number.toFixed(decimal_places);
+        }
+
+        target.text(floored_number + ' %');
+      }
+    },
+    3500
+  )
+   $(e).animateNumber(
+    {
+      number: y * 10,
+      color: 'black',
+      'font-size': '30px',
+
+      numberStep: function(now, tween) {
+        var floored_number = Math.floor(now) / decimal_factor,
+            target = $(tween.elem);
+        if (decimal_places > 0) {
+          floored_number = floored_number.toFixed(decimal_places);
+        }
+
+        target.text(floored_number);
+      }
+    },
+    3500
+  )
+   $(f).animateNumber(
+    {
+      number: z * 10,
+      color: 'black',
+      'font-size': '30px',
+
+      numberStep: function(now, tween) {
+        var floored_number = Math.floor(now) / decimal_factor,
+            target = $(tween.elem);
+        if (decimal_places > 0) {
+          floored_number = floored_number.toFixed(decimal_places);
+        }
+
+        target.text(floored_number);
+      }
+    },
+    3500
+  )
+  }
+$(document).ready(function(e) {
+  $( "#1s" ).click(function() {
+    $( ".seeds1" ).fadeOut( 50 ),
+      $( "#1seed" ).attr("src", "http://dannyliang.com/js/1seed.js"),
+        $( "#1seedr" ).fadeIn( 150 ),
+        $( "#form" ).css( "display", "flex" ),
+
+            ones(100.0, 86.7, 69.5, 40.2, 24.8, 15.5, "#target", "#target1", "#target2", "#target3", "#target4", "#target5");
+    });
+  });
+
+  $(document).ready(function(e) {
+    $( "#2s" ).click(function() {
+      $( ".seeds1" ).fadeOut( 50 ),
+        $( "#2seed7" ).attr("src", "http://dannyliang.com/js/2seed7.js"),
+          $( "#1seedr" ).fadeIn( 150 )
+
+            ones(93.8, 63.3, 46.9, 21.9, 10.1, 3.9, "#target", "#target1", "#target2", "#target3", "#target4", "#target5");
+      });
+    });
+
+    $(document).ready(function(e) {
+      $( "#3s" ).click(function() {
+        $( ".seeds1" ).fadeOut( 50 ),
+          $( "#3seed6" ).attr("src", "http://dannyliang.com/js/3seed6.js"),
+             $( "#1seedr" ).fadeIn( 150 )
+
+            ones(83.6, 50.7, 24.4, 10.9, 7.3, 3.1, "#target", "#target1", "#target2", "#target3", "#target4", "#target5");
+        });
+      });
+
+      $(document).ready(function(e) {
+        $( "#4s" ).click(function() {
+          $( ".seeds1" ).fadeOut( 50 ),
+            $( "#4seed5" ).attr("src", "http://dannyliang.com/js/4seed5.js")
+              $( "#1seedr" ).fadeIn( 150 )
+
+            ones(79.7, 46.6, 15.6, 10.2, 2.3, 0.8, "#target", "#target1", "#target2", "#target3", "#target4", "#target5");
+          });
+        });
+
+        $(document).ready(function(e) {
+          $( "#5s" ).click(function() {
+            $( ".seeds1" ).fadeOut( 50 ),
+              $( "#5seed" ).attr("src", "http://dannyliang.com/js/5seed.js")
+                 $( "#1seedr" ).fadeIn( 150 )
+
+            ones(64.1, 33.6, 6.2, 4.7, 1.9, 0, "#target", "#target1", "#target2", "#target3", "#target4", "#target5");
+            });
+          });
+
+          $(document).ready(function(e) {
+            $( "#6s" ).click(function() {
+              $( ".seeds1" ).fadeOut( 50 ),
+                $( "#6seed3" ).attr("src", "http://dannyliang.com/js/6seed3.js")
+                   $( "#1seedr" ).fadeIn( 150 )
+
+            ones(64.1, 32.8, 10.9, 2.3, 1.5, 0.8, "#target", "#target1", "#target2", "#target3", "#target4", "#target5");
+              });
+            });
+
+            $(document).ready(function(e) {
+              $( "#7s" ).click(function() {
+                $( ".seeds1" ).fadeOut( 50 ),
+                  $( "#7seed2" ).attr("src", "http://dannyliang.com/js/7seed2.js")
+                     $( "#1seedr" ).fadeIn( 150 )
+
+            ones(60.9, 18.0, 7.0, 1.6, 0.8, 0.8, "#target", "#target1", "#target2", "#target3", "#target4", "#target5");
+                });
+              });
+              $(document).ready(function(e) {
+                $( "#8s" ).click(function() {
+                  $( ".seeds1" ).fadeOut( 50 ),
+                    $( "#8seed" ).attr("src", "http://dannyliang.com/js/8seed.js")
+                       $( "#1seedr" ).fadeIn( 150 )
+
+            ones(50, 9.4, 6.3, 3.9, 2.4, 0.8, "#target", "#target1", "#target2", "#target3", "#target4", "#target5");
+                  });
+                });
+                $(document).ready(function(e) {
+                  $( "#9s" ).click(function() {
+                    $( ".seeds1" ).fadeOut( 50 ),
+                      $( "#9seed" ).attr("src", "http://dannyliang.com/js/9seed.js")
+                         $( "#1seedr" ).fadeIn( 150 )
+
+            ones(50, 3.8, 1.6, 0.8, 0, 0, "#target", "#target1", "#target2", "#target3", "#target4", "#target5");
+                    });
+                  });
+                  $(document).ready(function(e) {
+                    $( "#10s" ).click(function() {
+                      $( ".seeds1" ).fadeOut( 50 ),
+                        $( "#10seed2" ).attr("src", "http://dannyliang.com/js/10seed2.js")
+                           $( "#1seedr" ).fadeIn( 150 )
+
+            ones(39.1, 17.9, 6.2, 0.8, 0, 0, "#target", "#target1", "#target2", "#target3", "#target4", "#target5");
+                      });
+                    });
+                    $(document).ready(function(e) {
+                      $( "#11s" ).click(function() {
+                        $( ".seeds1" ).fadeOut( 50 ),
+                          $( "#11seed3" ).attr("src", "http://dannyliang.com/js/11seed3.js")
+                             $( "#1seedr" ).fadeIn( 150 )
+
+            ones(35.9, 14.8, 4.7, 2.3, 0, 0, "#target", "#target1", "#target2", "#target3", "#target4", "#target5");
+                        });
+                      });
+                      $(document).ready(function(e) {
+                        $( "#12s" ).click(function() {
+                          $( ".seeds1" ).fadeOut( 50 ),
+                            $( "#12seed4" ).attr("src", "http://dannyliang.com/js/12seed4.js")
+                                $( "#1seedr" ).fadeIn( 150 )
+
+            ones(35.9, 24.6, 0.8, 0, 0, 0, "#target", "#target1", "#target2", "#target3", "#target4", "#target5");
+                          });
+                        });
+                        $(document).ready(function(e) {
+                          $( "#13s" ).click(function() {
+                            $( ".seeds1" ).fadeOut( 50 ),
+                              $( "#13seed5" ).attr("src", "http://dannyliang.com/js/13seed5.js")
+                                  $( "#1seedr" ).fadeIn( 150 )
+
+            ones(20.3, 4.7, 0, 0, 0, 0, "#target", "#target1", "#target2", "#target3", "#target4", "#target5");
+                            });
+                          });
+                          $(document).ready(function(e) {
+                            $( "#14s" ).click(function() {
+                              $( ".seeds1" ).fadeOut( 50 ),
+                                $( "#14seed" ).attr("src", "http://dannyliang.com/js/14seed.js")
+                                    $( "#1seedr" ).fadeIn( 150 )
+
+            ones(16.4, 1.6,0, 0, 0, 0, "#target", "#target1", "#target2", "#target3", "#target4", "#target5");
+                              });
+                            });
+                            $(document).ready(function(e) {
+                              $( "#15s" ).click(function() {
+                                $( ".seeds1" ).fadeOut( 50 ),
+                                  $( "#15seed" ).attr("src", "http://dannyliang.com/js/15seed.js")
+                                      $( "#1seedr" ).fadeIn( 150 )
+
+            ones(6.2,1.6, 0, 0, 0, 0, "#target", "#target1", "#target2", "#target3", "#target4", "#target5");
+                                });
+                              });
+                              $(document).ready(function(e) {
+                                $( "#16s" ).click(function() {
+                                  $( ".seeds1" ).fadeOut( 50 ),
+                                    $( "#16seed" ).attr("src", "http://dannyliang.com/js/16seed.js")
+                                        $( "#1seedr" ).fadeIn( 150 )
+
+            ones(0,0, 0, 0, 0, 0, "#target", "#target1", "#target2", "#target3", "#target4", "#target5")
+                                  });
+                                });
+
+$(document).ready(function(e) {
+  $( ".seeds1" ).attr( "display", "flex" );
+  });
+
+
+</script>
+<script>
+      function HLink() {
+        window.open("http://dannyliang.com/GMM.html", "_self");
+      }
+      function BLink() {
+        window.open("http://dannyliang.com/GMM/Seeds.html", "_self");
+      }
+      function ALink() {
+        window.open("http://dannyliang.com");
+      }
+    </script>
+
+
+   </body>
+</html>

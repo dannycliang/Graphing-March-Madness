@@ -1,0 +1,291 @@
+body {
+  background-size: 100% 100%;
+  overflow-x: hidden;
+  -webkit-transition:all .4s ease-in;
+    -moz-transition:all .4s ease-in;
+    -o-transition:all .4s ease-in;
+    -ms-transition:all .4s ease-in;
+    transition:all .4s ease-in;
+}
+
+
+
+p {
+  font-family: "Alegreya Sans SC", sans-serif;
+  font-size: 0.9em;
+}
+
+
+h1 {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 2.2em;
+  font-weight: lighter;
+  -moz-transition: all .4s ease-in;
+  -o-transition: all .4s ease-in;
+  -webkit-transition: all .4s ease-in;
+  transition: all .4s ease-in;
+  
+}
+
+h2 {
+  position: absolute;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1.5em;
+  word-spacing: 0.3em;
+  font-weight: lighter;
+  -moz-transition: all .4s ease-in;
+  -o-transition: all .4s ease-in;
+  -webkit-transition: all .4s ease-in;
+  transition: all .4s ease-in;
+}
+
+h2:hover {
+  color: #FFF;
+} 
+
+h3 {
+  font-family: "Alegreya Sans SC", sans-serif;
+  font-size: 1em;
+  font-weight: 200;
+  -webkit-transition: color 0.4s ease;
+-moz-transition: color 0.4s ease;
+-o-transition: color 0.4s ease;
+transition: color 0.4s ease;
+}
+
+ 
+
+h4 {
+  font-family: "Alegreya Sans SC", sans-serif;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+h5 {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1.35em;
+  font-weight: lighter;
+  -moz-transition: all .4s ease-in;
+  -o-transition: all .4s ease-in;
+  -webkit-transition: all .4s ease-in;
+  transition: all .4s ease-in;
+}
+
+h5:hover {
+  color: #FFF;
+} 
+
+h6 {
+  font-family: "Josefin Sans";
+  font-size: 1.25em;
+  cursor: pointer;
+}
+
+h6:hover {
+  color: #FFF;
+}  
+
+/******/
+
+a:link {
+  text-decoration: none;
+  display: inline-table;
+  color: #FFF;
+  font-size: 30px;
+  font-family: "Alegreya Sans SC", sans-serif;
+  text-indent: -55px;
+  font-weight: medium;
+}
+
+li a:link {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #FFFFFF;
+  font-weight: 300;
+	text-decoration: none;
+}
+
+li a:visited {
+	color:#FFFFFF;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #000;
+	text-decoration: none;
+}
+
+li a:hover {
+	display: block;
+	color: #000;
+	text-decoration: none;
+}
+
+a:active {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+
+
+
+
+/*****/
+
+
+
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+
+  .x.axis path {
+    display: none;
+  }
+
+
+
+  .line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+  }
+
+.container {
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  padding-top: 0.5em;
+}
+
+.navtitle {
+  display: flex;
+  padding-top: 0.8em;
+  justify-content: center;
+  align-items: center;
+  width: 13em;
+}
+
+.description {
+  padding-top: 1em;
+  text-align: center;
+}
+
+.seeds1 {
+  top: 5em;
+  position: relative;
+  display: none;
+  width: auto;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+
+#main {
+  position: relative;
+  margin-top: -3%;
+  display: none;
+  float: left;
+  width: 750px;
+}
+
+#test {
+  position: relative;
+  margin-left: -5000px;
+}
+
+#sidebar {
+  float: right;
+  width: 100px;
+}
+
+#sequence {
+  position: relative;
+  margin-top: 5%;
+  width: 600px;
+}
+
+#legend {
+  padding: 10px 0 0 3px;
+}
+
+#sequence text, #legend text {
+  font-weight: 600;
+  fill: #fff;
+}
+
+#chart {
+  position: relative;
+  left: 40%;
+}
+
+#chart path {
+  stroke: #fff;
+}
+
+#explanation {
+  position: absolute;
+  top: 260px;
+  left: 305px;
+  width: 140px;
+  text-align: center;
+  color: #666;
+  z-index: -1;
+  font-family: "Alegreya Sans SC";
+}
+
+#percentage {
+  font-size: 2.5em;
+}
+
+#title {
+  position: fixed;
+  width: 23em;
+  top: -1em;
+  left: 3em;
+}
+
+#info {
+  position: fixed;
+  display: inline-flex;
+  top: -1em;
+  word-spacing: 1em;
+  right: 3em;
+}
+
+#Pies {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+#percentages {
+  position: relative;
+  left: 1em;
+  top: 5em;
+}  
+
+.teams {
+  top: 2em;
+  position: relative;
+  display: none;
+  width: auto;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}  
+

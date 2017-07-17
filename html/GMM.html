@@ -1,0 +1,167 @@
+<html>
+  <head><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <title>
+      Graphing March Madness
+    </title>
+    
+    <link href="http://dannyliang.com/css/GMM.css" rel="stylesheet" type="text/css" />
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Hind" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="http://dannyliang.com/js/jquery.animateNumber.js"></script>
+  </head>
+  <body>
+    <div id = "info" style="display:none">
+      <h5 onclick="ALink()" style="cursor:pointer;" id = "About"> About&nbsp; </h5>
+      <h5 onclick="BLink()" style="cursor:pointer;" id = "Home"> Home&nbsp; </h5>
+      <h5 onclick="HLink()" style="cursor:pointer;" id = "Back"> Back </h5>
+    </div>
+    <div id = "title">
+      <h1 onclick = "HLink()" style="cursor:pointer;display:none;" id = "titt"> Graphing March Madness </h1>
+    </div>
+    <div id="main">
+      <div id="sequence"></div>
+      <div id="chart">
+        <div id="explanation" style="visibility: hidden;">
+          <span id="percentage"></span><br/>
+          of teams with this seed reach this round
+        </div>
+      </div>
+    </div>
+    <div id = "linef">
+    	<script type="text/javascript" id = "TeamR"></script>
+    </div>
+    <div id = "lines">
+    </div>
+    <div id = "linest">
+    </div>
+    <div id "Pies">
+    </div>
+    <script type="text/javascript" src="http://dannyliang.com/js/test.js"></script>
+    <div class = "container">
+    <div class = "nav">
+      <img class="icon icons8-Trophy" style="display:none; padding-top: 5em;" id = "PBSI" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAEmklEQVRoQ92a4ZUNQRCFayNgI7AiQASIABEgAkSACBCBFQEiQASIABFYEXC+OX1Hvdnuru6Zfu/s2f7zPK+7p25V3Vs13Xtkl2QcXRIclgNyx8wemhmfJwnoZzP7Zmbv0uch8N9MdvCJLYyfZoYt2MHnPDyQq2b21szuH8LKAc/4YGaPzeyMvTyQTwn5HzN7bWZMJAoMPALAJwMM6NniTbJD3ic62PHUzK6kqNz1QB6laPxKRhPC3Pib/vN6CnOPUa1zSecfaXKJw8zByYAhKqeaiPfv6T8rTySMLMYLOznaamXDPKJPdpAZpHtpyPkfiZKA/E6LjpVzhdUYf/tAQL44kufMASR249xjAVHKRHJ8kYAAbrZbhitloty/SEDEJXh90suR06TtL83sRUO+r5nCvs9TrYAHXRxBzl55OSus1kMOASR6hsrFM8qFIgJxkNxIkQR4UopGdyuKXu5rS1sU1CsbKXbmyS1vA+hWQb20QaQoMlQSqe+RmDAv4iFO/5rapzlqyxaFInONApNqytJzVFY2mSSv4FY8RK9GxJjvRwuQqOjSRuEgSM7+51oUHihD+fdUMTPGRlKtqOVw9gDJzfURJmvUQmW7Xz/5Qep1vFEsvpHSb97ITSAiUhtFpzW1aqlLhN+njc45ueQhEZSw0Y54g1vIKMOX0YkiIjGhTffSS6agUvBj+dv0rNrGJTASBTpTHlwbvUBydSoEEQHh9xyYHuXqBYKQYLia0iYQLUByYJBnmrWW9b1AvJA0g2gxRGmzjAzfa4RfwxGB/p74UeXEMp8j8vn5AgPx0XDeX6b2oEKSnoh4ovOqgOJlib1W17UOxaDqEgnUjO9Rq9IDRBWd1AUEkWH9VPCi0RMR9vKvoS21wdcU5tc6ZvFD+0avFDvYeoGwWJ7TRrmiGTlw+bsvdvzW2svN+/QC8UpCWsGTlnoSAYNnnNDACfq0XCGu7tELRFVdxzQoCzlNGmwZnJqQhvRPkB4wEf82pRYEJw3UTAKCbnmngetEJEGYXlnTWtoTnNZEdNb0RmRpo1JiS3oNeX3eCsS/n5BezR5MHiHCpBWfXSq19OhWIOyntr70/lLLNBXBbpXaBxC9v6whvUi+WcJHRATniPQ9UfHnzSJ5p078nz4KiI9K6eDCG+m50QO+CHQUEM+V6DyKuVK7zdwQspFAfINYO6337ciW+rOpIEY5LE+XWgzf4rRELnre6l6rZWO1MYABGMUSTtB2qPvtaj9aHjoytfQ8jNZBX86GnYO1FiNb5uwDCM9VocNoejGG/j1EpfZREHMO4yANUnse6BiJ1KMADh2jI4JycT0BqbkD5FMXq/4Ck9TjfX/YPeQoIBCZoqiLfdKIiCyPVAFGRJRu/I4g8EK1aWwFgrFEQC2G7ugxrtQJIwZwSHflACBqRAiQq8YWIDreF5HhQO70vmYYUWSdIlS6zgjBrQUiVSICGFI72wqNcCrH3OisLLvfWiBqvyGrP+IBWO6qIfdw+MJVnwbOkDh0nwGsBaLr7BZv986J/uJhaER08AZx/fUa3zmJbBmcJHpBIJJ8hyelv4Up7vsPlF42QvF0m0gAAAAASUVORK5CYII=" width="50" height="50">
+      <div class = "navtitle">
+        <h2 id = "PBS" style="cursor:pointer; display:none;" onmouseover="javascript:FLink('PBSD', 'http://dannyliang.com/images/SBS.png')"  onmouseout="javascript:RLink('PBSD')" onclick="javascript:SLink()"> Seed By Seed </h2>
+      </div>
+      <div class = "description">
+        <h3 id = "PBSD" style="display: none;"> Graphs detailing the <br> performance of each seed <br> in each round </h3>
+      </div>
+    </div>
+    </div>
+    <div class = "container">
+    <div class = "nav">
+      <img class="icon icons8-Tournament-Mode" style="display:none;" id = "GSPI" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAABAUlEQVRoQ+2YwQrDMAxD2///6A1KCmnYSe+NBuPdFVuSI6c7jyK/swiPoySRD3TnVVHm4mWIpIbcAmzjSBMZCrQj6SjMOEPFcneECotEReDROY3tWwDUCwIvRNKzlNFMi89jRBuh+KuXJjJZQhWl+LqO0PRJx1R3pAwRutBSvO5I2gjFNRH70diOSE8cbY9YjqTnXLGfZn9a9BdOif2diKBeEFiypeO341capfUYfbSU9AjINhH7jlBFKV7b7LQRim8iduq0I/+67EHyPiDouYTAy/dEGSKGKLEYRnHlssYMBrCJiP/9UjO2WYg6kbdev03EXoiKovQQI7VoDwq+DJEvZWw6M+m6YCwAAAAASUVORK5CYII=" width="50" height="50">
+      <div class = "navtitle">
+        <h2 id = "GSP" style="cursor:pointer; display: none;" onmouseover="javascript:setTimeout(FLink('GSPD', 'http://dannyliang.com/images/general.jpg'), 10000)" onmouseout="javascript:RLink('GSPD')"> General </h2>
+      </div>
+      <div class = "description">
+        <h3 id = "GSPD" style="display:none;"> More general graphs <br> depicting performance <br> of all seeds</h3>
+      </div>
+    </div>
+    </div>
+    <div class = "container">
+    <div class = "nav">
+      <img class="icon icons8-Teams" style="display: none;" id = "PBTI" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAEP0lEQVRoQ+2ZjXEUMQyFlQqACiAdkAqACoAKAhUAFUAqACoAKghUQKiApAJCBYQKYL4bvxudsVfy3QZ2Qjxzc8muLevp50n27dkVGXtXBIddA1maJ/9bj9wxs4dmdr98Ts3swYR3PpvZXTM7KZ8vZsaa2UfGI4dOcYDU48jMXjWe8+xl4/mFA/bJzM7nQDUF5FlR8Kbb6GdR4mN59q58vzczAKEUYAHwpLx7Wr7lxduV4gBm7U6jBwQFpch3M3tTANRhwRyBaSkCCED6AVCBwtsMhSje2mq0gKA03sD6WIv/pwZKPS/K3SjryAnWRvnAWoDipQ/OeMNgaiAIJkEZj81MITQseGCByAAjQBwYYXjUQL4Wlukl8PAGyQUiBkBMsWBXnAdCeLw2M3ICK20dr0nl/TQIBaLY2isCgqBvZsb33wqpGq8MyXM8Q1Skw0xASDgYhIJFnvyrgVc8PUMWkA1EMDkAQhiRG4z9uQpUtHHnvadzWJNQYwBQgJohDxBYCi9QZR9VG6iW1LWg1gNvYhDFOhaMKjaymV/Tu7yiAgsRyEuAoDb9waYA4aWQ+9ikcJE3jF7hRBH1Ux4cMmGfqTryqxEF7EmBxbDIuFXmYGBy6F75H/Av/IYoiDJM4iNAKIBl5KEeECUoYSCPKExbHvZ7CwiWx+O+rWHe26KTX+MJYaNr8Aq2AElIDwguphv2JIFXsVxEHAKC5X0/R1gSTr3QFBjvsW7IEL8+NntA5AWEKox+FMWyHpGxIgDeM8qjdamI2nhZLZrHJlhVHTP/R/WoDq2IHFohtjZWpGAWiO/R2JBEjJrNrOwWU2M0PM+AEC7mAgLbELuQg6iy1cK3kj3SoVNyVhRMfq72iYSMWg1LkSuA2UjGhjajsmsRKp7sd7ArEB1lYSj1RWKtqfrDuywQjMM+kEFdl1QD93cFIkGe8wWE2uJptbZoFojottXiq0c82hWI4hTGOSiKUxABkKXfSAedWDGEekHkkx+EF0RzHgmJrFazlayON3iXaVEiHXyo8jcgqF9+nEVCIiAI05ldYcRmuDyqCxnZyFeBrUOTvCQi2O90DiA9eoyeZ4H4wgnNS/mNdn7pQBS6Z41w2jDU0oGoVkTEEf6skHV/FEat9xnZul0Jb3WW7hExVtSALt4jnFBJ8PDibukeyYTfKmyzQLbJgeyaqUMbXQIXhq2fM4ZYy1fVrGIj86bYiCPBceLInPJIRqk0s2SEuTlDcqPQyuydZpaMMDdn4+AUrZ0DiG7woxNhpEv9XgYKGSuT7JnNxSyaS8er3wlpHPnQ4I0OyV2dyaPFc3hEZ3WYpf590O+vKyMPFEZqdcm65YwOZ2v5cwCpjcVZAUX41r2Xrjp7hiWMPFDWc6CKLvkuFUhPWZTTD6E6HAFU17Stda1r06b8y/BIFM71e4HyQBWmYY8lYUsAMgp8sR65BuIt8BvUoRKRV8a0bwAAAABJRU5ErkJggg==" width="50" height="50">
+      <div class = "navtitle">
+        <h2 id = "PBT" style="cursor:pointer; display: none;" onmouseover="javascript:setTimeout(FLink('PBTD', 'http://dannyliang.com/images/TBT.jpg'), 2500)" onmouseout="javascript:RLink('PBTD')" onclick="javascript:TLink()"> Team By Team </h2>
+      </div>
+      <div class = "description">
+        <h3 id = "PBTD" style="display: none;"> Graphs detailing the <br> performance of some  <br>  prominent teams </h3>
+      </div>
+    </div>
+    </div>
+  </div>
+  </div>
+  <script>
+
+ 
+ 
+$(document).ready(function(e) {
+  $( "#titt" ).add( "#info" ).fadeIn( 600, function() {
+    $( "#PBSI" ).add( "#PBS" ).add( "#PBSD" ).fadeIn( 600, function() {
+      $( "#GSPI" ).add( "#GSP" ).add( "#GSPD" ).fadeIn( 600, function() {
+        $( "#PBTI" ).add( "#PBT" ).add( "#PBTD" ).fadeIn( 600, function() {
+                  });
+                });
+              });
+            });
+          });
+       
+
+
+$(document).ready(function(e) {
+$( "#GSP" ).click(function() {
+  $( "#GSP" ).fadeOut( 100, function() {
+    $( "#GSPD" ).fadeOut( 100, function() {
+      $( "#GSPI" ).fadeOut( 100, function() {
+        $( "#PBT" ).fadeOut( 100, function() {
+          $( "#PBTD" ).fadeOut( 100, function() {
+            $( "#PBTI" ).fadeOut( 100, function() {
+              $( "#PBS" ).fadeOut( 100, function() {
+                $( "#PBSD" ).fadeOut( 100, function() {
+                  $( "#PBSI" ).fadeOut( 100, function() {
+                     $( "#main" ).fadeIn( 100 ),
+                   	$( "#TeamR" ).attr("src", "http://dannyliang.com/js/TeamR.js");
+                    });
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+    });
+  });
+});
+
+
+      
+
+</script>
+<script>
+      function HLink() {
+        window.open("http://dannyliang.com/GMM.html", "_self");
+      }
+      
+      function BLink() {
+        window.open("http://dannyliang.com", "_self");
+      }
+      
+      function ALink() {
+        window.open("http://dannyliang.com");
+      }
+      
+      function SLink() {
+        window.open("http://dannyliang.com/GMM/Seeds.html", "_self");
+      }
+      
+      function TLink() {
+        window.open("http://dannyliang.com/GMM/Teams.html", "_self");
+      }
+        
+      function FLink(desc, image) {
+      	document.body.style.backgroundImage = 'url(' + image + ')'; 
+      	document.getElementById(desc).style.color = "#FFF";
+      	document.getElementById("titt").style.color = "#FFF";
+      	document.getElementById("About").style.color = "#FFF";
+      	document.getElementById("Home").style.color = "#FFF";
+      	document.getElementById("Back").style.color = "#FFF";
+      }
+      
+      function RLink(desc) {
+      	document.body.style.backgroundImage = 'url(https://openclipart.org/download/233689/north-korean-maze-mobile-casino.svg)';
+      	document.getElementById(desc).style.color = "#000";
+      	document.getElementById("titt").style.color = "#000";
+      	document.getElementById("About").style.color = "#000";
+      	document.getElementById("Home").style.color = "#000";
+      	document.getElementById("Back").style.color = "#000";
+      }	   
+    </script>
+
+
+   </body>
+</html>

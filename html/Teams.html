@@ -1,0 +1,507 @@
+<html>
+  <head><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <title>
+      Graphing March Madness
+    </title>
+    <link href="http://dannyliang.com/css/Team.css" rel="stylesheet" type="text/css" />
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Hind" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="http://dannyliang.com/js/jquery.animateNumber.js"></script>
+  </head>
+  <body>
+    <div id = "info">
+      <h5 onclick="ALink()" style="cursor:pointer;" id = "About"> About&nbsp; </h5>
+      <h5 onclick="HLink()" style="cursor:pointer;" id = "Home"> Home&nbsp; </h5>
+      <h5 onclick="BLink()" style="cursor:pointer;" id = "Back"> Back </h5>
+    </div>
+    <div id = "title">
+      <h1 onclick = "HLink()" style="cursor:pointer;" id = "titt"> Graphing March Madness </h1>
+    </div>
+    <script type="text/javascript" id = "winr"></script>
+    <script type="text/javascript" id = "KU"></script>
+    <script type="text/javascript" id = "KUBG"> </script>
+    <script type="text/javascript" id = "UV"></script>
+    <script type="text/javascript" id = "BD"></script>
+    <script type="text/javascript" id = "TH"></script>
+    <script type="text/javascript" id = "WC"></script>
+    <script type="text/javascript" id = "BL"></script>
+    <script type="text/javascript" id = "WK"></script>
+    <script type="text/javascript" id = "GA"></script>
+    <script type="text/javascript" id = "CA"></script>
+    <script type="text/javascript" id = "HU"></script>
+    <script type="text/javascript" id = "SP"></script>
+    <script type="text/javascript" id = "TeamW"></script>
+    <script type="text/javascript" id = "TeamR"></script>
+    <h1 id = "Kt" style="display:none; justify-content: center; padding-top: 1em; color:#0051BA;"> Kansas Jayhawks </h1>
+    <h1 id = "No" style="display:none; justify-content: center; padding-top: 1em; color:#001F5B;"> Villanova Wildcats </h1>
+    <h1 id = "Du" style="display:none; justify-content: center; padding-top: 1em; color:#0736A4;"> Duke Blue Devils </h1>
+    <h1 id = "Nc" style="display:none; justify-content: center; padding-top: 1em;  color:#7BAFD4;"> North Carolina Tar Heels </h1>
+    <h1 id = "Ua" style="display:none; justify-content: center; padding-top: 1em;  color:#9D2235;"> Arizona Wildcats </h1>
+    <h1 id = "Gu" style="display:none; justify-content: center; padding-top: 1em;  color:#0b2a50;"> Gonzaga Bulldogs </h1>
+    <h1 id = "Uk" style="display:none; justify-content: center; padding-top: 1em;  color:#0033A0;"> Kentucky Wildcats </h1>
+    <h1 id = "Uf" style="display:none; justify-content: center; padding-top: 1em;  color:#FA4616;"> Florida Gators </h1>
+    <h1 id = "Ul" style="display:none; justify-content: center; padding-top: 1em;  color:#AD0000;"> Louisville Cardinals </h1>
+    <h1 id = "Uc" style="display:none; justify-content: center; padding-top: 1em;  color:#9EA6B3;"> Connecticut Huskies </h1>
+    <h1 id = "Ms" style="display:none; justify-content: center; padding-top: 1em;  color:#18453B;"> Michigan State Spartans </h1>
+    
+    <div id = "percentages">
+	  <p id = "1seedr" style="display:none; justify-content: center;">Percentage that make the R32 &nbsp;<span id="target" style="font-size: 28px; color:black;">0 %</span>, the Sweet 16 &nbsp;<span id="target1" style="font-size: 28px; color:black;">0 %</span>Elite 8 &nbsp;<span id="target2" style="font-size: 28px; color:black;">0 %</span> Final Four&nbsp; <span id="target3" style="font-size: 28px; color:black;">0 %</span>, Championship Game&nbsp; <span id="target4" style="font-size: 28px; color:black;">0 %</span> and win it all&nbsp; <span id="target5" style="font-size: 28px; color:black;">0 %</span> <br> The sequences represent possible combinations of opponents (i.e. 16-8-4-2 would represent playing a 16th seed, then an 8th seed, then a 4th seed, then a 2nd seed). <br> <br>
+	   <p id = "last3" style="display:none; justify-content: center;">Percentage that made the R32 since 1985 &nbsp;<span id="target6" style="font-size: 28px; color:black;">0 %</span>, the Sweet 16 &nbsp;<span id="target7" style="font-size: 28px; color:black;">0 %</span>Elite 8 &nbsp;<span id="target8" style="font-size: 28px; color:black;">0 %</span> Final Four&nbsp; <span id="target9" style="font-size: 28px; color:black;">0 %</span>, Championship Game&nbsp; <span id="target10" style="font-size: 28px; color:black;">0 %</span> and won it all&nbsp; <span id="target11" style="font-size: 28px; color:black;">0 %</span> </p>
+	    <p id = "last5" style="display:none; justify-content: center;">Percentage that made the R32 in the last 15 years &nbsp;<span id="target12" style="font-size: 28px; color:black;">0 %</span>, the Sweet 16 &nbsp;<span id="target13" style="font-size: 28px; color:black;">0 %</span>Elite 8 &nbsp;<span id="target14" style="font-size: 28px; color:black;">0 %</span> Final Four&nbsp; <span id="target15" style="font-size: 28px; color:black;">0 %</span>, Championship Game&nbsp; <span id="target16" style="font-size: 28px; color:black;">0 %</span> and won it all&nbsp; <span id="target17" style="font-size: 28px; color:black;">0 %</span> </p>
+	    <p id = "upset" style="display:none; justify-content: center;">Upset rate (losses to teams seeded 5+ higher) in the last 15 years &nbsp;<span id="target18" style="font-size: 28px; color:black;">0 %</span>, since 1985 &nbsp;<span id="target19" style="font-size: 28px; color:black;">0 %</span>tournament winrate last 15 years &nbsp;<span id="target20" style="font-size: 28px; color:black;">0 </span> since 1985&nbsp; <span id="target21" style="font-size: 28px; color:black;">0 </span>, <br> average seed since 1985 &nbsp; <span id="target22" style="font-size: 28px; color:black;">0 </span> average final opponent seed <span id="target23" style="font-size: 28px; color:black;">0</span> <br> <br> <br> </p>
+  </div>
+    </div>
+    <div class = "teams">
+      <h4 id = "Kan" style="color:#0051BA;"> Kansas&nbsp;&nbsp;&nbsp; </h4>
+      <h4 id = "Nov" style="color:#001F5B;"> Villanova&nbsp;&nbsp;&nbsp; </h4>
+      <h4 id = "Duk" style="color:#0736A4;"> Duke&nbsp;&nbsp;&nbsp; </h4>
+      <h4 id = "Unc" style="color:#7BAFD4;"> UNC&nbsp;&nbsp;&nbsp; </h4>
+    </div>
+    <div class = "teams">
+      <h4 id = "Ari" style="color:#9D2235;"> Arizona&nbsp;&nbsp;&nbsp; </h4>
+      <h4 id = "Gon" style="color:#0b2a50;"> Gonzaga&nbsp;&nbsp;&nbsp; </h4><br>
+      <h4 id = "Ken" style="color:#0033A0;"> Kentucky&nbsp;&nbsp;&nbsp; </h4>
+      <h4 id = "Fla" style="color:#FA4616;"> Florida&nbsp;&nbsp;&nbsp; </h4>
+    </div>
+    <div class = "teams">
+      <h4 id = "Lou" style="color:#AD0000;"> Louisville&nbsp;&nbsp;&nbsp; </h4>
+      <h4 id = "Con" style="color:#9EA6B3;"> UConn&nbsp;&nbsp;&nbsp; </h4>
+      <h4 id = "Msu" style="color:#18453B;"> MSU</h4>
+    </div>
+    <form style="display:none; justify-content: center; padding-top: 5em;" id = "form">
+      <label><input type="radio" name="dataset" id="dataset" value="total" checked> Total</label>
+      <label><input type="radio" name="dataset" id="dataset" value="Last15Years"> 2003-Present </label>
+      <label><input type="radio" name="dataset" id="dataset" value="option2"> 1985-2002 </label>
+    </form>
+    <script type="text/javascript" id = "seedpr"></script>
+  <script>
+
+
+  function ones(u, v, w, x, y, z, a, b, c, d, e, f) {
+  var decimal_places = 1;
+  var decimal_factor = decimal_places === 0 ? 1 : decimal_places * 10;
+  $(a).animateNumber(
+    {
+      number: u * 10,
+      color: 'black',
+      'font-size': '30px',
+
+      numberStep: function(now, tween) {
+        var floored_number = Math.floor(now) / decimal_factor,
+            target = $(tween.elem);
+        if (decimal_places > 0) {
+          floored_number = floored_number.toFixed(decimal_places);
+        }
+
+        target.text(floored_number + ' %');
+      }
+    },
+    3500
+  )
+
+ $(b).animateNumber(
+    {
+      number: v * 10,
+      color: 'black',
+      'font-size': '30px',
+
+      numberStep: function(now, tween) {
+        var floored_number = Math.floor(now) / decimal_factor,
+            target = $(tween.elem);
+        if (decimal_places > 0) {
+          floored_number = floored_number.toFixed(decimal_places);
+        }
+
+        target.text(floored_number + ' %');
+      }
+    },
+    3500
+  )
+
+   $(c).animateNumber(
+    {
+      number: w * 10,
+      color: 'black',
+      'font-size': '30px',
+
+      numberStep: function(now, tween) {
+        var floored_number = Math.floor(now) / decimal_factor,
+            target = $(tween.elem);
+        if (decimal_places > 0) {
+          floored_number = floored_number.toFixed(decimal_places);
+        }
+
+        target.text(floored_number + ' %');
+      }
+    },
+    3500
+  )
+   $(d).animateNumber(
+    {
+      number: x * 10,
+      color: 'black',
+      'font-size': '30px',
+
+      numberStep: function(now, tween) {
+        var floored_number = Math.floor(now) / decimal_factor,
+            target = $(tween.elem);
+        if (decimal_places > 0) {
+          floored_number = floored_number.toFixed(decimal_places);
+        }
+
+        target.text(floored_number + ' %');
+      }
+    },
+    3500
+  )
+   $(e).animateNumber(
+    {
+      number: y * 10,
+      color: 'black',
+      'font-size': '30px',
+
+      numberStep: function(now, tween) {
+        var floored_number = Math.floor(now) / decimal_factor,
+            target = $(tween.elem);
+        if (decimal_places > 0) {
+          floored_number = floored_number.toFixed(decimal_places);
+        }
+
+        target.text(floored_number + ' %');
+      }
+    },
+    3500
+  )
+   $(f).animateNumber(
+    {
+      number: z * 10,
+      color: 'black',
+      'font-size': '30px',
+
+      numberStep: function(now, tween) {
+        var floored_number = Math.floor(now) / decimal_factor,
+            target = $(tween.elem);
+        if (decimal_places > 0) {
+          floored_number = floored_number.toFixed(decimal_places);
+        }
+
+        target.text(floored_number + ' %');
+      }
+    },
+    3500
+  )
+  }
+  function twos(u, v, w, x, y, z, a, b, c, d, e, f) {
+  var decimal_places = 1;
+  var decimal_factor = decimal_places === 0 ? 1 : decimal_places * 10;
+  $(a).animateNumber(
+    {
+      number: u * 10,
+      color: 'black',
+      'font-size': '30px',
+
+      numberStep: function(now, tween) {
+        var floored_number = Math.floor(now) / decimal_factor,
+            target = $(tween.elem);
+        if (decimal_places > 0) {
+          floored_number = floored_number.toFixed(decimal_places);
+        }
+
+        target.text(floored_number + ' %');
+      }
+    },
+    3500
+  )
+
+ $(b).animateNumber(
+    {
+      number: v * 10,
+      color: 'black',
+      'font-size': '30px',
+
+      numberStep: function(now, tween) {
+        var floored_number = Math.floor(now) / decimal_factor,
+            target = $(tween.elem);
+        if (decimal_places > 0) {
+          floored_number = floored_number.toFixed(decimal_places);
+        }
+
+        target.text(floored_number + ' %');
+      }
+    },
+    3500
+  )
+
+   $(c).animateNumber(
+    {
+      number: w * 10,
+      color: 'black',
+      'font-size': '30px',
+
+      numberStep: function(now, tween) {
+        var floored_number = Math.floor(now) / decimal_factor,
+            target = $(tween.elem);
+        if (decimal_places > 0) {
+          floored_number = floored_number.toFixed(decimal_places);
+        }
+
+        target.text(floored_number + ' %');
+      }
+    },
+    3500
+  )
+   $(d).animateNumber(
+    {
+      number: x * 10,
+      color: 'black',
+      'font-size': '30px',
+
+      numberStep: function(now, tween) {
+        var floored_number = Math.floor(now) / decimal_factor,
+            target = $(tween.elem);
+        if (decimal_places > 0) {
+          floored_number = floored_number.toFixed(decimal_places);
+        }
+
+        target.text(floored_number + ' %');
+      }
+    },
+    3500
+  )
+   $(e).animateNumber(
+    {
+      number: y * 10,
+      color: 'black',
+      'font-size': '30px',
+
+      numberStep: function(now, tween) {
+        var floored_number = Math.floor(now) / decimal_factor,
+            target = $(tween.elem);
+        if (decimal_places > 0) {
+          floored_number = floored_number.toFixed(decimal_places);
+        }
+
+        target.text(floored_number);
+      }
+    },
+    3500
+  )
+   $(f).animateNumber(
+    {
+      number: z * 10,
+      color: 'black',
+      'font-size': '30px',
+
+      numberStep: function(now, tween) {
+        var floored_number = Math.floor(now) / decimal_factor,
+            target = $(tween.elem);
+        if (decimal_places > 0) {
+          floored_number = floored_number.toFixed(decimal_places);
+        }
+
+        target.text(floored_number);
+      }
+    },
+    3500
+  )
+  }
+
+
+
+$(document).ready(function(e) {
+  $( "#Kan" ).click(function() {
+    $( ".teams" ).fadeOut( 50 ),
+     $( "#Kt" ).css( "display", "flex" ),
+    	$( "#last3" ).fadeIn( 150 ),
+    	$( "#KU" ).attr("src", "http://dannyliang.com/js/kan.js"),
+    	$( "#form" ).css( "display", "flex" ),
+    	 $( "#last5").fadeIn( 100),
+    	 $( "#upset").fadeIn( 100 ),
+            ones(93.6, 64.5, 41.9, 25.8, 16.1, 6.5, "#target6", "#target7", "#target8", "#target9", "#target10", "#target11"),
+            ones(85.7, 64.3, 50, 21.4, 21.4, 7.1, "#target12", "#target13", "#target14", "#target15", "#target16", "#target17");
+            twos(40, 32.2, 73.4, 72.6, 3.1, 4.7, "#target18", "#target19", "#target20", "#target21", "#target22", "#target23");
+    });
+  });
+
+$(document).ready(function(e) {
+  $( "#Nov" ).click(function() {
+    $( ".teams" ).fadeOut( 50 ),
+     $( "#No" ).css( "display", "flex" ),
+     $( "#UV" ).attr("src", "http://dannyliang.com/js/Nov.js"),
+     $( "#form" ).css( "display", "flex" ),
+    	$( "#last3" ).fadeIn( 150 ),
+    	 $( "#last5").fadeIn( 100),
+    	 $( "#upset").fadeIn( 100 ),
+            ones(77.8, 38.9, 27.8, 16.7, 11.1, 11.1, "#target6", "#target7", "#target8", "#target9", "#target10", "#target11"),
+            ones(80, 50, 30, 20, 10, 10, "#target12", "#target13", "#target14", "#target15", "#target16", "#target17")
+            twos(40, 22.2, 66.7, 64.7, 6.8, 5.9, "#target18", "#target19", "#target20", "#target21", "#target22", "#target23");
+    });
+  });
+
+$(document).ready(function(e) {
+  $( "#Duk" ).click(function() {
+    $( ".teams" ).fadeOut( 50 ),
+     $( "#Du" ).css( "display", "flex" ),
+     $( "#BD" ).attr("src", "http://dannyliang.com/js/Duk.js"),
+     $( "#form" ).css( "display", "flex" ),
+    	$( "#last3" ).fadeIn( 150 ),
+    	 $( "#last5").fadeIn( 100),
+    	 $( "#upset").fadeIn( 100 ),
+            ones(87.1, 74.2, 45.2, 38.7, 29.0, 16.1, "#target6", "#target7", "#target8", "#target9", "#target10", "#target11"),
+            ones(80, 73.3, 26.7, 20, 13.3, 13.3, "#target12", "#target13", "#target14", "#target15", "#target16", "#target17"),
+            twos(26.7, 19.3, 69.3, 77.6, 2.8, 7.4, "#target18", "#target19", "#target20", "#target21", "#target22", "#target23");
+    });
+  });
+
+ $(document).ready(function(e) {
+  $( "#Unc" ).click(function() {
+    $( ".teams" ).fadeOut( 50 ),
+     $( "#Nc" ).css( "display", "flex" ),
+     $( "#TH" ).attr("src", "http://dannyliang.com/js/Unc.js"),
+     $( "#form" ).css( "display", "flex" ),
+    	$( "#last3" ).fadeIn( 150 ),
+    	 $( "#last5").fadeIn( 100),
+    	 $( "#upset").fadeIn( 100 ),
+            ones(96.6, 72.4, 55.2, 34.5, 13.8, 10.3, "#target6", "#target7", "#target8", "#target9", "#target10", "#target11"),
+            ones(100, 66.7, 58.3, 33.3, 25, 16.7, "#target12", "#target13", "#target14", "#target15", "#target16", "#target17"),
+            twos(16.7, 17.2, 78.2, 73.8, 3.5, 5.4, "#target18", "#target19", "#target20", "#target21", "#target22", "#target23");
+    });
+  });
+
+ $(document).ready(function(e) {
+  $( "#Ari" ).click(function() {
+    $( ".teams" ).fadeOut( 50 ),
+     $( "#Ua" ).css( "display", "flex" ),
+     $( "#WC" ).attr("src", "http://dannyliang.com/js/Ari.js"),
+     $( "#form" ).css( "display", "flex" ),
+     $( "#form" ).css( "display", "flex" ),
+    	$( "#last3" ).fadeIn( 150 ),
+    	 $( "#last5").fadeIn( 100),
+    	 $( "#upset").fadeIn( 100 ),
+            ones(63.3, 53.3, 33.3, 13.3, 6.7, 3.3, "#target6", "#target7", "#target8", "#target9", "#target10", "#target11"),
+            ones(69.2, 61.5, 38.5, 0, 0, 0, "#target12", "#target13", "#target14", "#target15", "#target16", "#target17"),
+            twos(7.6, 23.3, 62.8, 63.4, 4.4, 4.4, "#target18", "#target19", "#target20", "#target21", "#target22", "#target23");
+    });
+  });
+
+ $(document).ready(function(e) {
+  $( "#Gon" ).click(function() {
+    $( ".teams" ).fadeOut( 50 ),
+     $( "#Gu" ).css( "display", "flex" ),
+     $( "#BL" ).attr("src", "http://dannyliang.com/js/Gon.js"),
+     $( "#form" ).css( "display", "flex" ),
+    	$( "#last3" ).fadeIn( 150 ),
+    	 $( "#last5").fadeIn( 100),
+    	 $( "#upset").fadeIn( 100 ),
+            ones(78.9, 36.8, 10.5, 0, 0, 0, "#target6", "#target7", "#target8", "#target9", "#target10", "#target11"),
+            ones(80, 26.7, 6.7, 0, 0, 0, "#target12", "#target13", "#target14", "#target15", "#target16", "#target17"),
+            twos(20, 15, 2,53.1, 55.8, 4.9, "#target18", "#target19", "#target20", "#target21", "#target22", "#target23");
+    });
+  });
+
+  $(document).ready(function(e) {
+  $( "#Ken" ).click(function() {
+    $( ".teams" ).fadeOut( 50 ),
+     $( "#Uk" ).css( "display", "flex" ),
+     $( "#WK" ).attr("src", "http://dannyliang.com/js/Ken.js"),
+     $( "#form" ).css( "display", "flex" ),
+    	$( "#last3" ).fadeIn( 150 ),
+    	 $( "#last5").fadeIn( 100),
+    	 $( "#upset").fadeIn( 100 ),
+            ones(92.6, 70.4, 55.6, 29.6, 18.5, 11.1, "#target6", "#target7", "#target8", "#target9", "#target10", "#target11"),
+            ones(92.3, 61.5, 53.8, 30.8, 15.4, 7.7, "#target12", "#target13", "#target14", "#target15", "#target16", "#target17"),
+            twos(7.6, 7.4, 75.6, 72.3, 3.7, 3.7, "#target18", "#target19", "#target20", "#target21", "#target22", "#target23");
+    });
+  });
+
+   $(document).ready(function(e) {
+  $( "#Lou" ).click(function() {
+    $( ".teams" ).fadeOut( 50 ),
+     $( "#Ul" ).css( "display", "flex" ),
+     $( "#CA" ).attr("src", "http://dannyliang.com/js/Lou.js"),
+     $( "#form" ).css( "display", "flex" ),
+    	$( "#last3" ).fadeIn( 150 ),
+    	 $( "#last5").fadeIn( 100),
+    	 $( "#upset").fadeIn( 100 ),
+            ones(75, 58.3, 33.3, 20.8, 8.3, 8.3, "#target6", "#target7", "#target8", "#target9", "#target10", "#target11"),
+            ones(75, 58.3, 50, 33.3, 8.3, 8.3, "#target12", "#target13", "#target14", "#target15", "#target16", "#target17"),
+            twos(16.7, 12.5, 69.2, 67.0, 4.7, 4.1, "#target18", "#target19", "#target20", "#target21", "#target22", "#target23");
+    });
+  });
+
+   $(document).ready(function(e) {
+  $( "#Fla" ).click(function() {
+    $( ".teams" ).fadeOut( 50 ),
+     $( "#Uf" ).css( "display", "flex" ),
+     $( "#GA" ).attr("src", "http://dannyliang.com/js/Fla.js"),
+     $( "#form" ).css( "display", "flex" ),
+    	$( "#last3" ).fadeIn( 150 ),
+    	 $( "#last5").fadeIn( 100),
+    	 $( "#upset").fadeIn( 100 ),
+            ones(73.7, 52.6, 42.1, 26.3, 15.7, 10.5, "#target6", "#target7", "#target8", "#target9", "#target10", "#target11"),
+            ones(72.7, 54.5, 54.5, 27.3, 18.2, 18.2, "#target12", "#target13", "#target14", "#target15", "#target16", "#target17"),
+            twos(45.5, 31.6, 71.1, 68.8, 4.2, 5.7, "#target18", "#target19", "#target20", "#target21", "#target22", "#target23");
+    });
+  });
+
+ $(document).ready(function(e) {
+  $( "#Con" ).click(function() {
+    $( ".teams" ).fadeOut( 50 ),
+     $( "#Uc" ).css( "display", "flex" ),
+     $( "#HU" ).attr("src", "http://dannyliang.com/js/Con.js"),
+     $( "#form" ).css( "display", "flex" ),
+    	$( "#last3" ).fadeIn( 150 ),
+    	 $( "#last5").fadeIn( 100),
+    	 $( "#upset").fadeIn( 100 ),
+            ones(90, 70, 50, 25, 20, 20, "#target6", "#target7", "#target8", "#target9", "#target10", "#target11"),
+            ones(81.8, 63.6, 54.5,36.4, 27.3, 27.3, "#target12", "#target13", "#target14", "#target15", "#target16", "#target17"),
+            twos(27.2, 15, 80, 77.5, 3.5, 4.4, "#target18", "#target19", "#target20", "#target21", "#target22", "#target23");
+    });
+  });
+
+   $(document).ready(function(e) {
+  $( "#Msu" ).click(function() {
+    $( ".teams" ).fadeOut( 50 ),
+     $( "#Ms" ).css( "display", "flex" ),
+     $( "#SP" ).attr("src", "http://dannyliang.com/js/Msu.js"),
+     $( "#form" ).css( "display", "flex" ),
+    	$( "#last3" ).fadeIn( 150 ),
+    	 $( "#last5").fadeIn( 100),
+    	 $( "#upset").fadeIn( 100 ),
+            ones(73.1, 57.7, 34.6, 26.9, 7.7, 3.8, "#target6", "#target7", "#target8", "#target9", "#target10", "#target11"),
+            ones(66.7, 60, 40, 26.7, 6.7, 0, "#target12", "#target13", "#target14", "#target15", "#target16", "#target17"),
+            twos(13.3, 11.5, 70.5, 67.0, 4.8, 4.6, "#target18", "#target19", "#target20", "#target21", "#target22", "#target23");
+    });
+  });
+
+
+
+
+</script>
+<script>
+      function HLink() {
+        window.open("http://dannyliang.com/GMM.html", "_self");
+      }
+
+      function BLink() {
+        window.open("http://dannyliang.com/GMM/Teams.html", "_self");
+      }
+
+      function ALink() {
+        window.open("http://dannyliang.com");
+      }
+
+      function SLink() {
+        window.open("http://dannyliang.com/GMM/Seeds.html", "_self");
+      }
+
+    </script>
+
+
+   </body>
+</html>
