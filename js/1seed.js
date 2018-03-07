@@ -1,3 +1,4 @@
+// Round by round winrates
 var myData = "Round	16-8-4-2	16-8-4-3	16-8-4-11	16-8-5-2	16-8-5-3/6/7/10	16-8-5-11	16-8-12-2	16-8-12/13-2/3	16-8-12-7/10/11\n\
 Round of 64	100	100	100	100	100	100	100	100	100\n\
 Round of 32	81.2	81.2	81.2	81.2	81.2	81.2	81.2	81.2	81.2\n\
@@ -5,8 +6,7 @@ Sweet 16	70.9	70.9	70.9	75	75	75	100	100	100\n\
 Elite 8	62.5	50	100	80.0	100.0	0.0	50	0	100\n\
 ";
 
-
-
+// Dimensions of the graph
 var margin = {
     top: 20,
     right: 300,
@@ -16,17 +16,17 @@ var margin = {
   width = 1350 - margin.left - margin.right,
   height = 650 - margin.top - margin.bottom;
 
+// Scales for x and y
 var x = d3.scale.ordinal()
     .domain(["Round of 64", "Round of 32", "Sweet 16", "Elite 8"])
     .rangePoints([0, width]);
-
-
 
 var y = d3.scale.linear()
   .range([height, 0]);
 
 var color = d3.scale.category10();
 
+// Add axes to appropriate locations
 var xAxis = d3.svg.axis()
   .scale(x)
   .orient("bottom");
@@ -36,39 +36,35 @@ var yAxis = d3.svg.axis()
   .orient("left");
 
 var line = d3.svg.line()
-
   .interpolate("linear")
   .x(function(d) {
     return x(d.Round);
   })
   .y(function(d) {
-    return y(d.temperature);
+    return y(d.winrate);
   });
 
-
-
+// Add graph to appropriate div on the page
 var svg = d3.select("#linelocation").append("svg")
-
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+// Parse the data
 var data = d3.tsv.parse(myData);
 
 color.domain(d3.keys(data[0]).filter(function(key) {
   return key !== "Round";
 }));
 
-
-
-var cities = color.domain().map(function(name) {
+var rounds = color.domain().map(function(name) {
   return {
     name: name,
     values: data.map(function(d) {
       return {
         Round: d.Round,
-        temperature: +d[name]
+        winrate: +d[name]
       };
     })
   };
@@ -79,7 +75,7 @@ y.domain([
 ]);
 
 var legend = svg.selectAll('g')
-  .data(cities)
+  .data(rounds)
   .enter()
   .append('g')
   .attr('class', 'legend');
@@ -119,14 +115,12 @@ svg.append("g")
   .style("text-anchor", "end")
   .text("Win Rate (%)");
 
-var city = svg.selectAll(".city")
-  .data(cities)
+var stage = svg.selectAll(".stage")
+  .data(rounds)
   .enter().append("g")
-  .attr("class", "city");
+  .attr("class", "stage");
 
-
-
-city.append("path")
+stage.append("path")
   .attr("class", "line")
   .attr("d", function(d) {
     return line(d.values);
@@ -151,14 +145,14 @@ city.append("path")
       .each('end', function() {
         d3.select('line.guide')
           .transition()
-          .style('opacity', 0)
+          .style('opastage', 0)
           .remove()
       });
 
     t.select('rect.curtain')
       .attr('width', 0);
 
-city.append("text")
+stage.append("text")
   .datum(function(d) {
     return {
       name: d.name,
@@ -166,7 +160,7 @@ city.append("text")
     };
   })
   .attr("transform", function(d) {
-    return "translate(" + x(d.value.Round) + "," + y(d.value.temperature) + ")";
+    return "translate(" + x(d.value.Round) + "," + y(d.value.winrate) + ")";
   })
   .attr("x", 4)
   .attr("dy", ".35em")
@@ -179,12 +173,12 @@ mouseG.append("path") // this is the black vertical line to follow mouse
   .attr("class", "mouse-line")
   .style("stroke", "black")
   .style("stroke-width", "1px")
-  .style("opacity", "0");
+  .style("opastage", "0");
 
 var lines = document.getElementsByClassName('line');
 
 var mousePerLine = mouseG.selectAll('.mouse-per-line')
-  .data(cities)
+  .data(rounds)
   .enter()
   .append("g")
   .attr("class", "mouse-per-line");
@@ -196,33 +190,33 @@ mousePerLine.append("circle")
   })
   .style("fill", "none")
   .style("stroke-width", "1px")
-  .style("opacity", "0");
+  .style("opastage", "0");
 
 mousePerLine.append("text")
   .attr("transform", "translate(10,3)");
 
-mouseG.append('svg:rect') // append a rect to catch mouse movements on canvas
-  .attr('width', width) // can't catch mouse events on a g element
+mouseG.append('svg:rect')
+  .attr('width', width)
   .attr('height', height)
   .attr('fill', 'none')
   .attr('pointer-events', 'all')
-  .on('mouseout', function() { // on mouse out hide line, circles and text
+  .on('mouseout', function() {
     d3.select(".mouse-line")
-      .style("opacity", "0");
+      .style("opastage", "0");
     d3.selectAll(".mouse-per-line circle")
-      .style("opacity", "0");
+      .style("opastage", "0");
     d3.selectAll(".mouse-per-line text")
-      .style("opacity", "0");
+      .style("opastage", "0");
   })
-  .on('mouseover', function() { // on mouse in show line, circles and text
+  .on('mouseover', function() {
     d3.select(".mouse-line")
-      .style("opacity", "1");
+      .style("opastage", "1");
     d3.selectAll(".mouse-per-line circle")
-      .style("opacity", "1");
+      .style("opastage", "1");
     d3.selectAll(".mouse-per-line text")
-      .style("opacity", "1");
+      .style("opastage", "1");
   })
-  .on('mousemove', function() { // mouse moving over canvas
+  .on('mousemove', function() {
     var mouse = d3.mouse(this);
     d3.select(".mouse-line")
       .attr("d", function() {
@@ -234,7 +228,7 @@ mouseG.append('svg:rect') // append a rect to catch mouse movements on canvas
     d3.selectAll(".mouse-per-line")
       .attr("transform", function(d, i) {
         console.log(width/mouse[0])
-       
+
 
         var beginning = 0,
             end = lines[i].getTotalLength(),
@@ -302,7 +296,7 @@ var line = d3.svg.line()
     return x(d.Round);
   })
   .y(function(d) {
-    return y(d.temperature);
+    return y(d.winrate);
   });
 
 
@@ -321,13 +315,13 @@ color.domain(d3.keys(data[0]).filter(function(key) {
 
 
 
-var cities = color.domain().map(function(name) {
+var rounds = color.domain().map(function(name) {
   return {
     name: name,
     values: data.map(function(d) {
       return {
         Round: d.Round,
-        temperature: +d[name]
+        winrate: +d[name]
       };
     })
   };
@@ -338,7 +332,7 @@ y.domain([
 ]);
 
 var legend = svg.selectAll('g')
-  .data(cities)
+  .data(rounds)
   .enter()
   .append('g')
   .attr('class', 'legend');
@@ -378,14 +372,14 @@ svg.append("g")
   .style("text-anchor", "end")
   .text("Win Rate (%)");
 
-var city = svg.selectAll(".city")
-  .data(cities)
+var stage = svg.selectAll(".stage")
+  .data(rounds)
   .enter().append("g")
-  .attr("class", "city");
+  .attr("class", "stage");
 
 
 
-city.append("path")
+stage.append("path")
   .attr("class", "line")
   .attr("d", function(d) {
     return line(d.values);
@@ -410,14 +404,14 @@ city.append("path")
       .each('end', function() {
         d3.select('line.guide')
           .transition()
-          .style('opacity', 0)
+          .style('opastage', 0)
           .remove()
       });
 
     t.select('rect.curtain')
       .attr('width', 0);
 
-city.append("text")
+stage.append("text")
   .datum(function(d) {
     return {
       name: d.name,
@@ -425,7 +419,7 @@ city.append("text")
     };
   })
   .attr("transform", function(d) {
-    return "translate(" + x(d.value.Round) + "," + y(d.value.temperature) + ")";
+    return "translate(" + x(d.value.Round) + "," + y(d.value.winrate) + ")";
   })
   .attr("x", 4)
   .attr("dy", ".35em")
@@ -434,16 +428,16 @@ city.append("text")
 var mouseG = svg.append("g")
   .attr("class", "mouse-over-effects");
 
-mouseG.append("path") // this is the black vertical line to follow mouse
+mouseG.append("path")
   .attr("class", "mouse-line")
   .style("stroke", "black")
   .style("stroke-width", "1px")
-  .style("opacity", "0");
+  .style("opastage", "0");
 
 var lines = document.getElementsByClassName('line');
 
 var mousePerLine = mouseG.selectAll('.mouse-per-line')
-  .data(cities)
+  .data(rounds)
   .enter()
   .append("g")
   .attr("class", "mouse-per-line");
@@ -455,33 +449,33 @@ mousePerLine.append("circle")
   })
   .style("fill", "none")
   .style("stroke-width", "1px")
-  .style("opacity", "0");
+  .style("opastage", "0");
 
 mousePerLine.append("text")
   .attr("transform", "translate(10,3)");
 
-mouseG.append('svg:rect') // append a rect to catch mouse movements on canvas
-  .attr('width', width) // can't catch mouse events on a g element
+mouseG.append('svg:rect')
+  .attr('width', width)
   .attr('height', height)
   .attr('fill', 'none')
   .attr('pointer-events', 'all')
-  .on('mouseout', function() { // on mouse out hide line, circles and text
+  .on('mouseout', function() {
     d3.select(".mouse-line")
-      .style("opacity", "0");
+      .style("opastage", "0");
     d3.selectAll(".mouse-per-line circle")
-      .style("opacity", "0");
+      .style("opastage", "0");
     d3.selectAll(".mouse-per-line text")
-      .style("opacity", "0");
+      .style("opastage", "0");
   })
-  .on('mouseover', function() { // on mouse in show line, circles and text
+  .on('mouseover', function() {
     d3.select(".mouse-line")
-      .style("opacity", "1");
+      .style("opastage", "1");
     d3.selectAll(".mouse-per-line circle")
-      .style("opacity", "1");
+      .style("opastage", "1");
     d3.selectAll(".mouse-per-line text")
-      .style("opacity", "1");
+      .style("opastage", "1");
   })
-  .on('mousemove', function() { // mouse moving over canvas
+  .on('mousemove', function() {
     var mouse = d3.mouse(this);
     d3.select(".mouse-line")
       .attr("d", function() {
@@ -493,7 +487,7 @@ mouseG.append('svg:rect') // append a rect to catch mouse movements on canvas
     d3.selectAll(".mouse-per-line")
       .attr("transform", function(d, i) {
         console.log(width/mouse[0])
-       
+
 
         var beginning = 0,
             end = lines[i].getTotalLength(),
@@ -644,10 +638,10 @@ var margin = {
                 .duration(10000)
                 .attr("y", function(d) { return y(d.value); })
                 .attr("height", function(d) { return height - y(d.value); });
-                
 
-                
-                
+
+
+
 
         bar
                 .on("mousemove", function(d){
